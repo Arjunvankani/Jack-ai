@@ -7,8 +7,8 @@ ChromaDB wrapper — per-user collections for:
 
 import chromadb
 import json
+import os
 from datetime import datetime
-from sentence_transformers import SentenceTransformer
 from backend.config import settings
 
 _client = None
@@ -22,15 +22,27 @@ def _get_client() -> chromadb.PersistentClient:
     return _client
 
 
-def _get_embedder() -> SentenceTransformer:
+def _get_embedder():
     global _embedder
     if _embedder is None:
-        _embedder = SentenceTransformer("all-MiniLM-L6-v2")
+        # Check if we are on Render (Free tier memory limit)
+        if "PORT" in os.environ:
+            print("[INFO] Cloud environment detected. Skipping heavy embedding model to save RAM.")
+            return None
+        try:
+            from sentence_transformers import SentenceTransformer
+            _embedder = SentenceTransformer("all-MiniLM-L6-v2")
+        except Exception as e:
+            print(f"[WARN] Could not load embedding model: {e}")
+            return None
     return _embedder
 
 
 def _embed(text: str) -> list[float]:
-    return _get_embedder().encode(text).tolist()
+    model = _get_embedder()
+    if model is None:
+        return [0.0] * 384 # Fallback zero vector
+    return model.encode(text).tolist()
 
 
 def _col(user_id: str, kind: str):
