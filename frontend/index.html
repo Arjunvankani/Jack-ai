@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jack AI — Your Personal Companion</title>
+  <meta name="description" content="Jack AI — a personalized voice AI companion that learns you, remembers you, and grows with you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- ── Animated background ── -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ── App Shell ── -->
+  <div class="app-shell">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="jack-logo">
+          <div class="jack-orb"></div>
+          <span class="jack-name">Jack <span class="jack-ai">AI</span></span>
+        </div>
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Switch Theme">🌗</button>
+      </div>
+
+      <div class="sidebar-section">
+        <p class="sidebar-label">Who's talking?</p>
+        <div class="user-list" id="userList">
+          <div class="user-skeleton"></div>
+          <div class="user-skeleton"></div>
+        </div>
+        <button class="btn-add-user" id="btnAddUser">＋ Add person</button>
+      </div>
+
+      <div class="sidebar-section" id="interestsPanel" style="display:none">
+        <p class="sidebar-label">🔥 Current Interests</p>
+        <div class="interests-list" id="interestsList"></div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="status-dot" id="statusDot"></div>
+        <span id="statusText" class="status-text">Ready</span>
+      </div>
+    </aside>
+
+    <!-- ── Main Chat Area ── -->
+    <main class="chat-area">
+      <header class="chat-header">
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <div class="active-user-info" id="activeUserInfo">
+          <span class="active-avatar" id="activeAvatar">👤</span>
+          <div>
+            <p class="active-name" id="activeName">Select a person</p>
+            <p class="active-sub" id="activeSub">Jack is listening...</p>
+          </div>
+        </div>
+        <button class="btn-end-session" id="btnEndSession" title="End conversation session">⏹ End Session</button>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="welcome-card">
+          <div class="welcome-icon">🎙️</div>
+          <h2>Hey! I'm Jack</h2>
+          <p>Select or add a person from the sidebar, then press the mic and talk to me.</p>
+        </div>
+      </div>
+
+      <!-- ── Input Bar ── -->
+      <div class="input-bar">
+        <input
+          type="text"
+          id="textInput"
+          placeholder="Type a message..."
+          autocomplete="off"
+        />
+        <button class="btn-send" id="btnSend" title="Send text">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+        <button class="btn-mic" id="btnMic" title="Hold to speak">
+          <span class="mic-icon">🎤</span>
+          <span class="mic-ripple"></span>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- ── Add User Modal ── -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="addUserModal">
+      <h3 class="modal-title">Add a new person</h3>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" id="inputName" placeholder="e.g. Priya" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Age</label>
+          <input type="number" id="inputAge" placeholder="7" min="1" max="100" />
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="inputGender">
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Language</label>
+        <select id="inputLanguage">
+          <option value="en">English</option>
+          <option value="hinglish">Hinglish (Hindi + English)</option>
+          <option value="hi">Hindi</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Pick an avatar</label>
+        <div class="emoji-picker" id="emojiPicker">
+          <span data-emoji="👦">👦</span><span data-emoji="👧">👧</span>
+          <span data-emoji="🧑">🧑</span><span data-emoji="👨">👨</span>
+          <span data-emoji="👩">👩</span><span data-emoji="🧓">🧓</span>
+          <span data-emoji="👴">👴</span><span data-emoji="👵">👵</span>
+          <span data-emoji="🧒">🧒</span><span data-emoji="🧑‍💻">🧑‍💻</span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="btnCancel">Cancel</button>
+        <button class="btn-create" id="btnCreate">Add to Jack ✨</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

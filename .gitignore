@@ -1,0 +1,24 @@
+# Environments
+.env
+.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+
+# Database / Storage
+data/
+*.db
+chroma_db/
+
+# Logs
+*.log
+jack_log.json
+
+# OS
+.DS_Store
+Thumbs.db
