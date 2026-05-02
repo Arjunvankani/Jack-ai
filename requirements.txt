@@ -6,8 +6,6 @@ google-generativeai
 chromadb
 sentence-transformers
 edge-tts
-sounddevice
-pyaudio
 apscheduler
 sqlalchemy
 aiofiles
