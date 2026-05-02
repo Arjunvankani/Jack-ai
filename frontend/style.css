@@ -36,11 +36,17 @@ body.light-theme {
 
 /* ─── Reset ─────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; overflow: hidden; }
+html, body { 
+  height: 100%; 
+  height: 100dvh; /* Dynamic Viewport Height for mobile */
+  overflow: hidden; 
+}
 body {
   font-family: var(--font);
   background: var(--bg);
   color: var(--text-1);
+  /* Fix for mobile address bar */
+  min-height: -webkit-fill-available;
 }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 input, select { font-family: inherit; }
@@ -65,7 +71,9 @@ input, select { font-family: inherit; }
 /* ─── App Shell ─────────────────────────────────────────────────────────── */
 .app-shell {
   position: relative; z-index: 1;
-  display: flex; height: 100vh;
+  display: flex; 
+  height: 100%;
+  height: 100dvh;
 }
 
 /* ─── Sidebar ───────────────────────────────────────────────────────────── */
@@ -401,23 +409,29 @@ input, select { font-family: inherit; }
   .sidebar { 
     position: fixed; left: 0; top: 0; bottom: 0; z-index: 1000; 
     transform: translateX(-100%); width: 85%; max-width: 300px;
+    height: 100dvh;
   }
   .sidebar.open { transform: translateX(0); box-shadow: 10px 0 50px rgba(0,0,0,0.8); }
   
-  .menu-toggle { display: block; margin-right: 8px; }
+  .menu-toggle { display: block; margin-right: 8px; font-size: 20px; }
   .active-name { font-size: 15px; }
-  .active-sub { display: none; } /* Hide subtext on very small screens to save space */
+  .active-sub { display: none; }
   
-  .chat-header { padding: 12px 16px; height: 60px; }
-  .input-bar { padding: 12px; gap: 8px; }
-  .btn-mic { width: 44px; height: 44px; font-size: 18px; }
+  .chat-header { padding: 8px 16px; height: 56px; }
+  .input-bar { 
+    padding: 10px 12px; 
+    gap: 8px;
+    background: var(--bg); /* Match background for seamless look */
+  }
+  .btn-mic { width: 42px; height: 42px; font-size: 18px; }
+  .btn-send { width: 42px; height: 42px; }
   
-  .msg { max-width: 92%; }
-  .msg-bubble { font-size: 13px; padding: 10px 14px; }
+  .messages { padding: 16px; gap: 12px; }
+  .msg { max-width: 95%; }
+  .msg-bubble { font-size: 13.5px; padding: 10px 14px; }
   
-  .welcome-card { padding: 24px 20px; width: 90%; }
-  .welcome-icon { font-size: 36px; }
-  .welcome-card h2 { font-size: 20px; }
+  .welcome-card { padding: 20px; width: 95%; margin: auto; }
+  .welcome-icon { font-size: 32px; }
 }
 
 @media (max-width: 400px) {
