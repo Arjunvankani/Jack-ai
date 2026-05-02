@@ -14,12 +14,9 @@ if sys.platform == "win32":
 import uvicorn
 
 if __name__ == "__main__":
-    # Ensure .env exists
-    if not os.path.exists(".env"):
-        print("[WARN] No .env file found. Copying from .env.example...")
-        import shutil
-        shutil.copy(".env.example", ".env")
-        print("[INFO] Created .env — please add your GEMINI_API_KEY before chatting!\n")
+    # Environment check
+    if not os.path.exists(".env") and "PORT" not in os.environ:
+        print("[INFO] Running in local mode. No .env found, using system environment variables.")
 
     print("[INFO] Starting Jack AI server at http://localhost:8000")
     print("[INFO] Open http://localhost:8000 in your browser\n")
